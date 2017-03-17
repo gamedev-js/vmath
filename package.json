@@ -1,0 +1,35 @@
+{
+  "name": "vmath",
+  "version": "1.0.0",
+  "description": "Yet another gl-matrix: faster and smaller",
+  "main": "dist/vmath.js",
+  "scripts": {
+    "build": "rollup --config ./script/rollup.config.js",
+    "min": "uglifyjs ./dist/vmath.dev.js --source-map ./dist/vmath.min.js.map -o ./dist/vmath.min.js",
+    "release": "npm run build && npm run min",
+    "test": "npm run build && tap test/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gamedev-js/vmath.git"
+  },
+  "keywords": [
+    "math",
+    "algebre",
+    "vector",
+    "matrix"
+  ],
+  "author": "jwu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gamedev-js/vmath/issues"
+  },
+  "homepage": "https://github.com/gamedev-js/vmath/issues",
+  "dependencies": {},
+  "devDependencies": {
+    "fs-jetpack": "^0.13.0",
+    "rollup": "^0.41.4",
+    "tap": "^10.3.0",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"
+  }
+}
