@@ -89,6 +89,20 @@ tap.Test.prototype.addAssert('equal_v3', 2, function (found, wanted, message, ex
   return this.fail(message, extra);
 });
 
+tap.Test.prototype.addAssert('equal_v4', 2, function (found, wanted, message, extra ) {
+  let result = approx(found.x, wanted[0]) && approx(found.y, wanted[1]) && approx(found.z, wanted[2]) && approx(found.w, wanted[3]);
+
+  if ( result ) {
+    return this.pass(message, extra);
+  }
+
+  extra.found = found;
+  extra.wanted = wanted;
+  extra.compare = '==';
+
+  return this.fail(message, extra);
+});
+
 tap.Test.prototype.addAssert('equal_m2', 2, function (found, wanted, message, extra ) {
   let result = approx(found.m00, wanted[0]) &&
     approx(found.m01, wanted[1]) &&
