@@ -22,6 +22,25 @@ tap.Test.prototype.addAssert('approx', 3, function (found, wanted, maxDifferent,
   return this.fail(message, extra);
 });
 
+tap.Test.prototype.addAssert('deepApprox', 3, function (found, wanted, maxDifferent, message, extra ) {
+  maxDifferent = maxDifferent || 0.0001;
+  message = message || `should be approximate (${maxDifferent})`;
+
+  for ( let name in found ) {
+    let diff = Math.abs(found[name] - wanted[name]);
+
+    if (diff > maxDifferent) {
+      extra.found = found;
+      extra.wanted = wanted;
+      extra.compare = '~=';
+
+      return this.fail(message, extra);
+    }
+  }
+
+  return this.pass(message, extra);
+});
+
 tap.Test.prototype.addAssert('approxArray', 3, function (found, wanted, maxDifferent, message, extra ) {
   if ( found.length !== wanted.length ) {
     return this.fail(message, extra);
