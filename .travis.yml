@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - "6"
+
+branches:
+  only:
+    - master
+
+cache:
+  - directories:
+    - node_modules
+
+install:
+  - npm install
+
+script: npm test
+
+notifications:
+  email: false
