@@ -11,11 +11,11 @@ tap.test('quat', t => {
   let deg90 = Math.PI / 2;
 
   t.beforeEach(done => {
-    quat.set(quatA, 1, 2, 3, 4);
-    quat.set(quatB, 5, 6, 7, 8);
-    quat.set(out, 0, 0, 0, 0);
-    quat.set(id, 0, 0, 0, 1);
-    vec3.set(vec, 1, 1, -1);
+    quatA = quat.new(1, 2, 3, 4);
+    quatB = quat.new(5, 6, 7, 8);
+    out = quat.new(0, 0, 0, 0);
+    id = quat.new(0, 0, 0, 1);
+    vec = vec3.new(1, 1, -1);
     deg90 = Math.PI / 2;
 
     done();
