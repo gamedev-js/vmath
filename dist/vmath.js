@@ -4337,7 +4337,7 @@ mat23.equals = function (a, b) {
   );
 };
 
-// NOTE: we use column-major matrix
+// NOTE: we use row-major matrix
 // Where:
 
 // m00, m01, m02, m03
