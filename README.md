@@ -6,11 +6,9 @@ Yet another gl-matrix but smaller (without SIMD) and faster (use Hidden class in
 
 ## Why?
 
-  - Bug fixes compare to gl-matrix.
-  - More math methods compare to gl-matrix.
-  - Use row-major matrix for all calculation.
-  - Use hidden class compare to Float32Array for fast data access and fast create.
+  - Hidden classes + inline caching is much faster than Array/Float32Array.
   - Remove SIMD for smaller footprint.
+  - Make sure using the column-major matrix for all calculation.
 
 ## Install
 

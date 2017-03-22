@@ -1,11 +1,11 @@
 {
   "name": "vmath",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Yet another gl-matrix: faster and smaller",
   "main": "dist/vmath.js",
   "scripts": {
     "build": "rollup --config ./script/rollup.config.js",
-    "min": "uglifyjs ./dist/vmath.dev.js --source-map ./dist/vmath.min.js.map -o ./dist/vmath.min.js",
+    "min": "uglifyjs ./dist/vmath.dev.js --mangle --source-map ./dist/vmath.min.js.map -o ./dist/vmath.min.js",
     "release": "npm run build && npm run min",
     "test": "npm run build && tap test/*.spec.js"
   },

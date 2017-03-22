@@ -2136,17 +2136,30 @@ vec4.equals = function (a, b) {
     Math.abs(a3 - b3) <= EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)));
 };
 
-// NOTE: we use row-major matrix
-// Where:
-
-// m00, m01, m02
-// m10, m11, m12
-// m20, m21, m22
-
-// The floats are laid out:
-// x | m0 | m1 | m2
-// y | m3 | m4 | m5
-// z | m6 | m7 | m8
+/**
+ * NOTE: we use column-major matrix for all matrix calculation.
+ *
+ * This may lead to some confusion when referencing OpenGL documentation,
+ * however, which represents out all matricies in column-major format.
+ * This means that while in code a matrix may be typed out as:
+ *
+ * [1, 0, 0, 0,
+ *  0, 1, 0, 0,
+ *  0, 0, 1, 0,
+ *  x, y, z, 0]
+ *
+ * The same matrix in the [OpenGL documentation](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glTranslate.xml)
+ * is written as:
+ *
+ *  1 0 0 x
+ *  0 1 0 y
+ *  0 0 1 z
+ *  0 0 0 0
+ *
+ * Please rest assured, however, that they are the same thing!
+ * This is not unique to glMatrix, either, as OpenGL developers have long been confused by the
+ * apparent lack of consistency between the memory layout and the documentation.
+ */
 
 class _mat3 {
   constructor(m00, m01, m02, m03, m04, m05, m06, m07, m08) {
@@ -4337,19 +4350,30 @@ mat23.equals = function (a, b) {
   );
 };
 
-// NOTE: we use row-major matrix
-// Where:
-
-// m00, m01, m02, m03
-// m10, m11, m12, m13
-// m20, m21, m22, m23
-// m30, m31, m32, m33
-
-// The floats are laid out:
-// x |  m0 |  m1 |  m2 |  m3
-// y |  m4 |  m5 |  m6 |  m7
-// z |  m8 |  m9 | m10 | m11
-// T | m12 | m13 | m15 | m15
+/**
+ * NOTE: we use column-major matrix
+ *
+ * This may lead to some confusion when referencing OpenGL documentation,
+ * however, which represents out all matricies in column-major format.
+ * This means that while in code a matrix may be typed out as:
+ *
+ * [1, 0, 0, 0,
+ *  0, 1, 0, 0,
+ *  0, 0, 1, 0,
+ *  x, y, z, 0]
+ *
+ * The same matrix in the [OpenGL documentation](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glTranslate.xml)
+ * is written as:
+ *
+ *  1 0 0 x
+ *  0 1 0 y
+ *  0 0 1 z
+ *  0 0 0 0
+ *
+ * Please rest assured, however, that they are the same thing!
+ * This is not unique to glMatrix, either, as OpenGL developers have long been confused by the
+ * apparent lack of consistency between the memory layout and the documentation.
+ */
 
 class _mat4 {
   constructor(
