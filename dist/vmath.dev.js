@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.0.1
+ * vmath v1.1.0
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -701,15 +701,15 @@ vec2.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {vec2}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {vec2} v
+ * @returns {array}
  */
-vec2.array = function (a) {
-  let result = new Float32Array(2);
-  result[0] = a.x;
-  result[1] = a.y;
+vec2.array = function (out, v) {
+  out[0] = v.x;
+  out[1] = v.y;
 
-  return result;
+  return out;
 };
 
 /**
@@ -1506,16 +1506,16 @@ vec3.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {vec3}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {vec3} v
+ * @returns {array}
  */
-vec3.array = function (a) {
-  let result = new Float32Array(3);
-  result[0] = a.x;
-  result[1] = a.y;
-  result[2] = a.z;
+vec3.array = function (out, v) {
+  out[0] = v.x;
+  out[1] = v.y;
+  out[2] = v.z;
 
-  return result;
+  return out;
 };
 
 /**
@@ -2140,17 +2140,17 @@ vec4.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {vec4}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {vec4} v
+ * @returns {array}
  */
-vec4.array = function (a) {
-  let result = new Float32Array(4);
-  result[0] = a.x;
-  result[1] = a.y;
-  result[2] = a.z;
-  result[3] = a.w;
+vec4.array = function (out, v) {
+  out[0] = v.x;
+  out[1] = v.y;
+  out[2] = v.z;
+  out[3] = v.w;
 
-  return result;
+  return out;
 };
 
 /**
@@ -2789,22 +2789,22 @@ mat3.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {mat3}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {mat3} m
+ * @returns {array}
  */
-mat3.array = function (a) {
-  let result = new Float32Array(9);
-  result[0] = a.m00;
-  result[1] = a.m01;
-  result[2] = a.m02;
-  result[3] = a.m03;
-  result[4] = a.m04;
-  result[5] = a.m05;
-  result[6] = a.m06;
-  result[7] = a.m07;
-  result[8] = a.m08;
+mat3.array = function (out, m) {
+  out[0] = m.m00;
+  out[1] = m.m01;
+  out[2] = m.m02;
+  out[3] = m.m03;
+  out[4] = m.m04;
+  out[5] = m.m05;
+  out[6] = m.m06;
+  out[7] = m.m07;
+  out[8] = m.m08;
 
-  return result;
+  return out;
 };
 
 /**
@@ -3543,17 +3543,17 @@ quat.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {quat}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {quat} q
+ * @returns {array}
  */
-quat.array = function (a) {
-  let result = new Float32Array(4);
-  result[0] = a.x;
-  result[1] = a.y;
-  result[2] = a.z;
-  result[3] = a.w;
+quat.array = function (out, q) {
+  out[0] = q.x;
+  out[1] = q.y;
+  out[2] = q.z;
+  out[3] = q.w;
 
-  return result;
+  return out;
 };
 
 /**
@@ -3860,17 +3860,17 @@ mat2.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {mat2}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {mat2} m
+ * @returns {array}
  */
-mat2.array = function (a) {
-  let result = new Float32Array(4);
-  result[0] = a.m00;
-  result[1] = a.m01;
-  result[2] = a.m02;
-  result[3] = a.m03;
+mat2.array = function (out, m) {
+  out[0] = m.m00;
+  out[1] = m.m01;
+  out[2] = m.m02;
+  out[3] = m.m03;
 
-  return result;
+  return out;
 };
 
 /**
@@ -4330,19 +4330,19 @@ mat23.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {mat23}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {mat23} m
+ * @returns {array}
  */
-mat23.array = function (a) {
-  let result = new Float32Array(6);
-  result[0] = a.m00;
-  result[1] = a.m01;
-  result[2] = a.m02;
-  result[3] = a.m03;
-  result[4] = a.m04;
-  result[5] = a.m05;
+mat23.array = function (out, m) {
+  out[0] = m.m00;
+  out[1] = m.m01;
+  out[2] = m.m02;
+  out[3] = m.m03;
+  out[4] = m.m04;
+  out[5] = m.m05;
 
-  return result;
+  return out;
 };
 
 /**
@@ -5925,29 +5925,29 @@ mat4.str = function (a) {
 /**
  * Returns typed array
  *
- * @param {mat4}
- * @returns {Float32Array}
+ * @param {array} out
+ * @param {mat4} m
+ * @returns {array}
  */
-mat4.array = function (a) {
-  let result = new Float32Array(16);
-  result[0] = a.m00;
-  result[1] = a.m01;
-  result[2] = a.m02;
-  result[3] = a.m03;
-  result[4] = a.m04;
-  result[5] = a.m05;
-  result[6] = a.m06;
-  result[7] = a.m07;
-  result[8] = a.m08;
-  result[9] = a.m09;
-  result[10] = a.m10;
-  result[11] = a.m11;
-  result[12] = a.m12;
-  result[13] = a.m13;
-  result[14] = a.m14;
-  result[15] = a.m15;
+mat4.array = function (out, m) {
+  out[0]  = m.m00;
+  out[1]  = m.m01;
+  out[2]  = m.m02;
+  out[3]  = m.m03;
+  out[4]  = m.m04;
+  out[5]  = m.m05;
+  out[6]  = m.m06;
+  out[7]  = m.m07;
+  out[8]  = m.m08;
+  out[9]  = m.m09;
+  out[10] = m.m10;
+  out[11] = m.m11;
+  out[12] = m.m12;
+  out[13] = m.m13;
+  out[14] = m.m14;
+  out[15] = m.m15;
 
-  return result;
+  return out;
 };
 
 /**

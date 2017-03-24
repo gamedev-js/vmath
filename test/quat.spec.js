@@ -708,7 +708,7 @@ tap.test('quat', t => {
   });
 
   t.test('array', t => {
-    result = quat.array(quatA);
+    result = quat.array([], quatA);
 
     t.deepEqual(result, new Float32Array([1, 2, 3, 4]));
 

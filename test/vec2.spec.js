@@ -760,7 +760,7 @@ tap.test('vec2', t => {
   });
 
   t.test('array', t => {
-    result = vec2.array(vecA);
+    result = vec2.array([], vecA);
 
     t.deepEqual(result, new Float32Array([1, 2]));
 
