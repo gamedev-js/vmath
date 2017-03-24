@@ -336,6 +336,14 @@ tap.test('mat3', t => {
     t.end();
   });
 
+  t.test('array', t => {
+    result = mat3.array(matA);
+
+    t.deepEqual(result, new Float32Array([1, 0, 0, 0, 1, 0, 1, 2, 1]));
+
+    t.end();
+  });
+
   t.test('frob', t => {
     result = mat3.frob(matA);
 

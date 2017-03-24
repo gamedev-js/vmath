@@ -486,9 +486,9 @@ fs-exists-cached@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs-exists-cached/-/fs-exists-cached-1.0.0.tgz#cf25554ca050dc49ae6656b41de42258989dcbce"
 
-fs-jetpack@^0.13.0:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/fs-jetpack/-/fs-jetpack-0.13.1.tgz#5aaa2a05ed1f19f06c5f3af60a259dd18c91679e"
+fs-jetpack@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/fs-jetpack/-/fs-jetpack-0.13.2.tgz#6de7cfe3968f13f539455e8c82fab7650ca959bc"
   dependencies:
     minimatch "^3.0.2"
 
@@ -1480,15 +1480,7 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
-uglify-js@^2.6:
-  version "2.8.13"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.13.tgz#d0cdf02f3c661484fac601b7e723207b735a374c"
-  dependencies:
-    source-map "~0.5.1"
-    uglify-to-browserify "~1.0.0"
-    yargs "~3.10.0"
-
-"uglify-js@git+https://github.com/mishoo/UglifyJS2.git#harmony":
+uglify-js@^2.6, "uglify-js@git+https://github.com/mishoo/UglifyJS2.git#harmony":
   version "2.8.12"
   resolved "git+https://github.com/mishoo/UglifyJS2.git#2fd86d3cb02c2bcde81633c0096b308e2809ea00"
   dependencies:
@@ -1542,13 +1534,9 @@ window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
 
-wordwrap@0.0.2:
+wordwrap@0.0.2, wordwrap@~0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
-
-wordwrap@~0.0.2:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"

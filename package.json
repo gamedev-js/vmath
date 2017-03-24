@@ -27,7 +27,7 @@
   "homepage": "https://github.com/gamedev-js/vmath/issues",
   "dependencies": {},
   "devDependencies": {
-    "fs-jetpack": "^0.13.0",
+    "fs-jetpack": "^0.13.2",
     "rollup": "^0.41.4",
     "tap": "^10.3.0",
     "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"

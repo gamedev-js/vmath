@@ -759,6 +759,14 @@ tap.test('vec2', t => {
     t.end();
   });
 
+  t.test('array', t => {
+    result = vec2.array(vecA);
+
+    t.deepEqual(result, new Float32Array([1, 2]));
+
+    t.end();
+  });
+
   t.test('exactEquals', t => {
     vec2.set(vecA, 0, 1);
     vec2.set(vecB, 0, 1);

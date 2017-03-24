@@ -707,6 +707,14 @@ tap.test('quat', t => {
     t.end();
   });
 
+  t.test('array', t => {
+    result = quat.array(quatA);
+
+    t.deepEqual(result, new Float32Array([1, 2, 3, 4]));
+
+    t.end();
+  });
+
   t.test('exactEquals', t => {
     quat.set(quatA, 0, 1, 2, 3);
     quat.set(quatB, 0, 1, 2, 3);

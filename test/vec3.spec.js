@@ -930,6 +930,14 @@ tap.test('vec3', t => {
     t.end();
   });
 
+  t.test('array', t => {
+    result = vec3.array(vecA);
+
+    t.deepEqual(result, new Float32Array([1, 2, 3]));
+
+    t.end();
+  });
+
   t.test('exactEquals', t => {
     let vecC, r0, r1;
     vec3.set(vecA, 0, 1, 2);

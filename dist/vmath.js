@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.0.0
+ * vmath v1.0.1
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -697,6 +697,20 @@ vec2.forEach = (function () {
  */
 vec2.str = function (a) {
   return `vec2(${a.x}, ${a.y})`;
+};
+
+/**
+ * Returns typed array
+ *
+ * @param {vec2}
+ * @returns {Float32Array}
+ */
+vec2.array = function (a) {
+  let result = new Float32Array(2);
+  result[0] = a.x;
+  result[1] = a.y;
+
+  return result;
 };
 
 /**
@@ -1491,6 +1505,21 @@ vec3.str = function (a) {
 };
 
 /**
+ * Returns typed array
+ *
+ * @param {vec3}
+ * @returns {Float32Array}
+ */
+vec3.array = function (a) {
+  let result = new Float32Array(3);
+  result[0] = a.x;
+  result[1] = a.y;
+  result[2] = a.z;
+
+  return result;
+};
+
+/**
  * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
  *
  * @param {vec3} a The first vector.
@@ -2107,6 +2136,22 @@ vec4.forEach = (function () {
  */
 vec4.str = function (a) {
   return `vec4(${a.x}, ${a.y}, ${a.z}, ${a.w})`;
+};
+
+/**
+ * Returns typed array
+ *
+ * @param {vec4}
+ * @returns {Float32Array}
+ */
+vec4.array = function (a) {
+  let result = new Float32Array(4);
+  result[0] = a.x;
+  result[1] = a.y;
+  result[2] = a.z;
+  result[3] = a.w;
+
+  return result;
 };
 
 /**
@@ -2740,6 +2785,27 @@ mat3.normalFromMat4 = function (out, a) {
  */
 mat3.str = function (a) {
   return `mat3(${a.m00}, ${a.m01}, ${a.m02}, ${a.m03}, ${a.m04}, ${a.m05}, ${a.m06}, ${a.m07}, ${a.m08})`;
+};
+
+/**
+ * Returns typed array
+ *
+ * @param {mat3}
+ * @returns {Float32Array}
+ */
+mat3.array = function (a) {
+  let result = new Float32Array(9);
+  result[0] = a.m00;
+  result[1] = a.m01;
+  result[2] = a.m02;
+  result[3] = a.m03;
+  result[4] = a.m04;
+  result[5] = a.m05;
+  result[6] = a.m06;
+  result[7] = a.m07;
+  result[8] = a.m08;
+
+  return result;
 };
 
 /**
@@ -3476,6 +3542,22 @@ quat.str = function (a) {
 };
 
 /**
+ * Returns typed array
+ *
+ * @param {quat}
+ * @returns {Float32Array}
+ */
+quat.array = function (a) {
+  let result = new Float32Array(4);
+  result[0] = a.x;
+  result[1] = a.y;
+  result[2] = a.z;
+  result[3] = a.w;
+
+  return result;
+};
+
+/**
  * Returns whether or not the quaternions have exactly the same elements in the same position (when compared with ===)
  *
  * @param {quat} a The first quaternion.
@@ -3774,6 +3856,22 @@ mat2.fromScaling = function (out, v) {
  */
 mat2.str = function (a) {
   return `mat2(${a.m00}, ${a.m01}, ${a.m02}, ${a.m03})`;
+};
+
+/**
+ * Returns typed array
+ *
+ * @param {mat2}
+ * @returns {Float32Array}
+ */
+mat2.array = function (a) {
+  let result = new Float32Array(4);
+  result[0] = a.m00;
+  result[1] = a.m01;
+  result[2] = a.m02;
+  result[3] = a.m03;
+
+  return result;
 };
 
 /**
@@ -4231,13 +4329,31 @@ mat23.str = function (a) {
 };
 
 /**
+ * Returns typed array
+ *
+ * @param {mat23}
+ * @returns {Float32Array}
+ */
+mat23.array = function (a) {
+  let result = new Float32Array(6);
+  result[0] = a.m00;
+  result[1] = a.m01;
+  result[2] = a.m02;
+  result[3] = a.m03;
+  result[4] = a.m04;
+  result[5] = a.m05;
+
+  return result;
+};
+
+/**
  * Returns Frobenius norm of a mat23
  *
  * @param {mat23} a the matrix to calculate Frobenius norm of
  * @returns {Number} Frobenius norm
  */
 mat23.frob = function (a) {
-  return (Math.sqrt(Math.pow(a.m00, 2) + Math.pow(a.m01, 2) + Math.pow(a.m02, 2) + Math.pow(a.m03, 2) + Math.pow(a.m04, 2) + Math.pow(a.m05, 2) + 1))
+  return (Math.sqrt(Math.pow(a.m00, 2) + Math.pow(a.m01, 2) + Math.pow(a.m02, 2) + Math.pow(a.m03, 2) + Math.pow(a.m04, 2) + Math.pow(a.m05, 2) + 1));
 };
 
 /**
@@ -4351,7 +4467,7 @@ mat23.equals = function (a, b) {
 };
 
 /**
- * NOTE: we use column-major matrix
+ * NOTE: we use column-major matrix for all matrix calculation.
  *
  * This may lead to some confusion when referencing OpenGL documentation,
  * however, which represents out all matricies in column-major format.
@@ -5805,6 +5921,34 @@ mat4.lookAt = function (out, eye, center, up) {
  */
 mat4.str = function (a) {
   return `mat4(${a.m00}, ${a.m01}, ${a.m02}, ${a.m03}, ${a.m04}, ${a.m05}, ${a.m06}, ${a.m07}, ${a.m08}, ${a.m09}, ${a.m10}, ${a.m11}, ${a.m12}, ${a.m13}, ${a.m14}, ${a.m15})`;
+};
+
+/**
+ * Returns typed array
+ *
+ * @param {mat4}
+ * @returns {Float32Array}
+ */
+mat4.array = function (a) {
+  let result = new Float32Array(16);
+  result[0] = a.m00;
+  result[1] = a.m01;
+  result[2] = a.m02;
+  result[3] = a.m03;
+  result[4] = a.m04;
+  result[5] = a.m05;
+  result[6] = a.m06;
+  result[7] = a.m07;
+  result[8] = a.m08;
+  result[9] = a.m09;
+  result[10] = a.m10;
+  result[11] = a.m11;
+  result[12] = a.m12;
+  result[13] = a.m13;
+  result[14] = a.m14;
+  result[15] = a.m15;
+
+  return result;
 };
 
 /**
