@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.1.2
+ * vmath v1.1.3
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
