@@ -1,5 +1,5 @@
 const tap = require('./tap');
-const { vec2, vec3, quat, mat3, mat4 } = require('../dist/vmath');
+const { vec2, vec3, quat, mat3, mat4, toRadian } = require('../dist/vmath');
 
 tap.test('mat3', t => {
   let out = mat3.create();
@@ -82,6 +82,22 @@ tap.test('mat3', t => {
       vec3.transformMat3(vec3.create(), vec3.new(0, 0, -1), out),
       [1, 0, 0]
     );
+
+    t.end();
+  });
+
+  t.test('fromViewUp', t => {
+    let v = vec3.new(0.5, 0, 0.5);
+    vec3.normalize(v,v);
+    result = mat3.fromViewUp(out, v);
+
+    let q = quat.create();
+    quat.rotateY(q, q, toRadian(45));
+    mat3.fromQuat(matA, q);
+
+    t.assert(result !== null);
+    t.equal(result, out);
+    t.equal_m3(result, mat3.array([], matA));
 
     t.end();
   });

@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.1.1
+ * vmath v1.1.2
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -2728,6 +2728,45 @@ mat3.fromQuat = function (out, q) {
 };
 
 /**
+* Calculates a 3x3 matrix from view direction and up direction
+*
+* @param {mat3} out mat3 receiving operation result
+* @param {vec3} view view direction (must be normalized)
+* @param {vec3} [up] up direction, default is (0,1,0) (must be normalized)
+*
+* @returns {mat3} out
+*/
+mat3.fromViewUp = (function () {
+  let default_up = vec3.new(0, 1, 0);
+  let x = vec3.create();
+  let y = vec3.create();
+
+  return function (out, view, up) {
+    if (vec3.sqrLen(view) < EPSILON * EPSILON) {
+      mat3.identity(out);
+      return out;
+    }
+
+    up = up || default_up;
+    vec3.cross(x, up, view);
+
+    if (vec3.sqrLen(x) < EPSILON * EPSILON) {
+      mat3.identity(out);
+      return out;
+    }
+
+    vec3.cross(y, view, x);
+    mat3.set(out,
+      x.x, x.y, x.z,
+      y.x, y.y, y.z,
+      view.x, view.y, view.z
+    );
+
+    return out;
+  };
+})();
+
+/**
 * Calculates a 3x3 normal matrix (transpose inverse) from the 4x4 matrix
 *
 * @param {mat3} out mat3 receiving operation result
@@ -3421,6 +3460,28 @@ quat.fromAxes = (function () {
       yAxis.x, yAxis.y, yAxis.z,
       zAxis.x, zAxis.y, zAxis.z
     );
+    return quat.normalize(out, quat.fromMat3(out, matr));
+  };
+})();
+
+/**
+* Calculates a quaternion from view direction and up direction
+*
+* @param {quat} out mat3 receiving operation result
+* @param {vec3} view view direction (must be normalized)
+* @param {vec3} [up] up direction, default is (0,1,0) (must be normalized)
+*
+* @returns {quat} out
+*/
+quat.fromViewUp = (function () {
+  let matr = mat3.create();
+
+  return function (out, view, up) {
+    mat3.fromViewUp(matr, view, up);
+    if (!matr) {
+      return null;
+    }
+
     return quat.normalize(out, quat.fromMat3(out, matr));
   };
 })();
