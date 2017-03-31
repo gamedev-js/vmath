@@ -19,3 +19,7 @@ npm install vmath
 ## Documentation
 
 TODO
+
+## License
+
+MIT © 2017 Johnny Wu
