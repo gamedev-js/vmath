@@ -42,14 +42,6 @@ tap.test('utils', t => {
     t.end();
   });
 
-  t.test('powof2', t => {
-    t.equal(utils.powof2(100), false);
-    t.equal(utils.powof2(64), true);
-    t.equal(utils.powof2(2), true);
-
-    t.end();
-  });
-
   t.test('lerp', t => {
     t.equal(utils.lerp(0, 1, 0.2), 0.2);
     t.equal(utils.lerp(-10, 10, 0.5), 0);

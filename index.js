@@ -1,4 +1,9 @@
 export * from './lib/utils';
+
+// NOTE: there is no syntax for: export {* as bits} from './lib/bits';
+import * as bits_ from './lib/bits';
+export let bits = bits_;
+
 export { default as vec2 } from './lib/vec2';
 export { default as vec3 } from './lib/vec3';
 export { default as vec4 } from './lib/vec4';
