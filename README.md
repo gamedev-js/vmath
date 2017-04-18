@@ -18,7 +18,7 @@ npm install vmath
 
 ## Documentation
 
-TODO
+  - [API](./api.md)
 
 ## License
 
