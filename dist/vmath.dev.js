@@ -1455,9 +1455,9 @@ vec3.normalize = function (out, a) {
   if (len > 0) {
     //TODO: evaluate use of glm_invsqrt here?
     len = 1 / Math.sqrt(len);
-    out.x = a.x * len;
-    out.y = a.y * len;
-    out.z = a.z * len;
+    out.x = x * len;
+    out.y = y * len;
+    out.z = z * len;
   }
   return out;
 };
