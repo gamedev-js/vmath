@@ -3557,13 +3557,13 @@ This is equivalent to (but much faster than):
     mat4.identity(dest);
     mat4.translate(dest, vec);
     let quatMat = mat4.create();
-    quat4.toMat4(quat, quatMat);
+    quat.toMat4(quat, quatMat);
     mat4.multiply(dest, quatMat);
 
 **Parameters**
 
 -   `out` **[mat4](#mat4)** mat4 receiving operation result
--   `q` **quat4** Rotation quaternion
+-   `q` **[quat](#quat)** Rotation quaternion
 -   `v` **[vec3](#vec3)** Translation vector
 
 Returns **[mat4](#mat4)** out
@@ -3619,14 +3619,14 @@ This is equivalent to (but much faster than):
     mat4.identity(dest);
     mat4.translate(dest, vec);
     let quatMat = mat4.create();
-    quat4.toMat4(quat, quatMat);
+    quat.toMat4(quat, quatMat);
     mat4.multiply(dest, quatMat);
     mat4.scale(dest, scale)
 
 **Parameters**
 
 -   `out` **[mat4](#mat4)** mat4 receiving operation result
--   `q` **quat4** Rotation quaternion
+-   `q` **[quat](#quat)** Rotation quaternion
 -   `v` **[vec3](#vec3)** Translation vector
 -   `s` **[vec3](#vec3)** Scaling vector
 
@@ -3641,7 +3641,7 @@ This is equivalent to (but much faster than):
     mat4.translate(dest, vec);
     mat4.translate(dest, origin);
     let quatMat = mat4.create();
-    quat4.toMat4(quat, quatMat);
+    quat.toMat4(quat, quatMat);
     mat4.multiply(dest, quatMat);
     mat4.scale(dest, scale)
     mat4.translate(dest, negativeOrigin);
@@ -3649,7 +3649,7 @@ This is equivalent to (but much faster than):
 **Parameters**
 
 -   `out` **[mat4](#mat4)** mat4 receiving operation result
--   `q` **quat4** Rotation quaternion
+-   `q` **[quat](#quat)** Rotation quaternion
 -   `v` **[vec3](#vec3)** Translation vector
 -   `s` **[vec3](#vec3)** Scaling vector
 -   `o` **[vec3](#vec3)** The origin vector around which to scale and rotate
