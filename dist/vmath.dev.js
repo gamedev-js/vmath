@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.2.0
+ * vmath v1.2.1
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -122,6 +122,25 @@ function randomRange(min, max) {
  */
 function randomRangeInt(min, max) {
   return Math.floor(this.randomRange(min, max));
+}
+
+/**
+ * Returns the next power of two for the value
+ *
+ * @method nextPow2
+ * @param {number} val
+ * @return {number} the the next power of two
+ */
+function nextPow2(val) {
+  --val;
+  val = (val >> 1) | val;
+  val = (val >> 2) | val;
+  val = (val >> 4) | val;
+  val = (val >> 8) | val;
+  val = (val >> 16) | val;
+  ++val;
+
+  return val;
 }
 
 /**
@@ -254,7 +273,7 @@ function countTrailingZeros(v) {
  * @param {number} v
  * @returns {number}
  */
-function nextPow2(v) {
+function nextPow2$1(v) {
   v += v === 0;
   --v;
   v |= v >>> 1;
@@ -431,7 +450,7 @@ var bits_ = Object.freeze({
 	log10: log10,
 	popCount: popCount,
 	countTrailingZeros: countTrailingZeros,
-	nextPow2: nextPow2,
+	nextPow2: nextPow2$1,
 	prevPow2: prevPow2,
 	parity: parity,
 	reverse: reverse,
@@ -2487,7 +2506,24 @@ vec4.equals = function (a, b) {
     Math.abs(a3 - b3) <= EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)));
 };
 
+class _mat3 {
+  constructor(m00, m01, m02, m03, m04, m05, m06, m07, m08) {
+    this.m00 = m00;
+    this.m01 = m01;
+    this.m02 = m02;
+    this.m03 = m03;
+    this.m04 = m04;
+    this.m05 = m05;
+    this.m06 = m06;
+    this.m07 = m07;
+    this.m08 = m08;
+  }
+}
+
 /**
+ * @class 3x3 Matrix
+ * @name mat3
+ *
  * NOTE: we use column-major matrix for all matrix calculation.
  *
  * This may lead to some confusion when referencing OpenGL documentation,
@@ -2510,25 +2546,6 @@ vec4.equals = function (a, b) {
  * Please rest assured, however, that they are the same thing!
  * This is not unique to glMatrix, either, as OpenGL developers have long been confused by the
  * apparent lack of consistency between the memory layout and the documentation.
- */
-
-class _mat3 {
-  constructor(m00, m01, m02, m03, m04, m05, m06, m07, m08) {
-    this.m00 = m00;
-    this.m01 = m01;
-    this.m02 = m02;
-    this.m03 = m03;
-    this.m04 = m04;
-    this.m05 = m05;
-    this.m06 = m06;
-    this.m07 = m07;
-    this.m08 = m08;
-  }
-}
-
-/**
- * @class 3x3 Matrix
- * @name mat3
  */
 let mat3 = {};
 
@@ -4833,31 +4850,6 @@ mat23.equals = function (a, b) {
   );
 };
 
-/**
- * NOTE: we use column-major matrix for all matrix calculation.
- *
- * This may lead to some confusion when referencing OpenGL documentation,
- * however, which represents out all matricies in column-major format.
- * This means that while in code a matrix may be typed out as:
- *
- * [1, 0, 0, 0,
- *  0, 1, 0, 0,
- *  0, 0, 1, 0,
- *  x, y, z, 0]
- *
- * The same matrix in the [OpenGL documentation](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glTranslate.xml)
- * is written as:
- *
- *  1 0 0 x
- *  0 1 0 y
- *  0 0 1 z
- *  0 0 0 0
- *
- * Please rest assured, however, that they are the same thing!
- * This is not unique to glMatrix, either, as OpenGL developers have long been confused by the
- * apparent lack of consistency between the memory layout and the documentation.
- */
-
 class _mat4 {
   constructor(
     m00, m01, m02, m03,
@@ -4887,6 +4879,29 @@ class _mat4 {
 /**
  * @class 4x4 Matrix
  * @name mat4
+ *
+ * NOTE: we use column-major matrix for all matrix calculation.
+ *
+ * This may lead to some confusion when referencing OpenGL documentation,
+ * however, which represents out all matricies in column-major format.
+ * This means that while in code a matrix may be typed out as:
+ *
+ * [1, 0, 0, 0,
+ *  0, 1, 0, 0,
+ *  0, 0, 1, 0,
+ *  x, y, z, 0]
+ *
+ * The same matrix in the [OpenGL documentation](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glTranslate.xml)
+ * is written as:
+ *
+ *  1 0 0 x
+ *  0 1 0 y
+ *  0 0 1 z
+ *  0 0 0 0
+ *
+ * Please rest assured, however, that they are the same thing!
+ * This is not unique to glMatrix, either, as OpenGL developers have long been confused by the
+ * apparent lack of consistency between the memory layout and the documentation.
  */
 let mat4 = {};
 
@@ -5747,11 +5762,11 @@ mat4.fromZRotation = function (out, rad) {
  *     mat4.identity(dest);
  *     mat4.translate(dest, vec);
  *     let quatMat = mat4.create();
- *     quat4.toMat4(quat, quatMat);
+ *     quat.toMat4(quat, quatMat);
  *     mat4.multiply(dest, quatMat);
  *
  * @param {mat4} out mat4 receiving operation result
- * @param {quat4} q Rotation quaternion
+ * @param {quat} q Rotation quaternion
  * @param {vec3} v Translation vector
  * @returns {mat4} out
  */
@@ -5887,12 +5902,12 @@ mat4.getRotation = function (out, mat) {
  *     mat4.identity(dest);
  *     mat4.translate(dest, vec);
  *     let quatMat = mat4.create();
- *     quat4.toMat4(quat, quatMat);
+ *     quat.toMat4(quat, quatMat);
  *     mat4.multiply(dest, quatMat);
  *     mat4.scale(dest, scale)
  *
  * @param {mat4} out mat4 receiving operation result
- * @param {quat4} q Rotation quaternion
+ * @param {quat} q Rotation quaternion
  * @param {vec3} v Translation vector
  * @param {vec3} s Scaling vector
  * @returns {mat4} out
@@ -5945,13 +5960,13 @@ mat4.fromRTS = function (out, q, v, s) {
  *     mat4.translate(dest, vec);
  *     mat4.translate(dest, origin);
  *     let quatMat = mat4.create();
- *     quat4.toMat4(quat, quatMat);
+ *     quat.toMat4(quat, quatMat);
  *     mat4.multiply(dest, quatMat);
  *     mat4.scale(dest, scale)
  *     mat4.translate(dest, negativeOrigin);
  *
  * @param {mat4} out mat4 receiving operation result
- * @param {quat4} q Rotation quaternion
+ * @param {quat} q Rotation quaternion
  * @param {vec3} v Translation vector
  * @param {vec3} s Scaling vector
  * @param {vec3} o The origin vector around which to scale and rotate
@@ -6522,6 +6537,7 @@ exports.toDegree = toDegree;
 exports.random = random;
 exports.randomRange = randomRange;
 exports.randomRangeInt = randomRangeInt;
+exports.nextPow2 = nextPow2;
 
 }((this.vmath = this.vmath || {})));
 //# sourceMappingURL=vmath.dev.js.map
