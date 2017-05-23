@@ -73,6 +73,18 @@ tap.test('utils', t => {
     t.end();
   });
 
+  t.test('randomRangeInt', t => {
+    let r = utils.randomRangeInt(-10, 10);
+    t.assert(r >= -10 && r <= 10);
+    t.end();
+  });
+
+  t.test('nextPow2', t => {
+    t.equal(utils.nextPow2(10), 16);
+    t.equal(utils.nextPow2(245), 256);
+    t.end();
+  });
+
   t.end();
 });
 
