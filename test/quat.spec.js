@@ -461,40 +461,40 @@ tap.test('quat', t => {
     t.end();
   });
 
-  t.test('add', t => {
-    t.test('with a separate output quaternion', t => {
-      result = quat.add(out, quatA, quatB);
+  // t.test('add', t => {
+  //   t.test('with a separate output quaternion', t => {
+  //     result = quat.add(out, quatA, quatB);
 
-      t.equal_v4(out, [6, 8, 10, 12]);
-      t.equal(result, out);
-      t.equal_v4(quatA, [1, 2, 3, 4]);
-      t.equal_v4(quatB, [5, 6, 7, 8]);
+  //     t.equal_v4(out, [6, 8, 10, 12]);
+  //     t.equal(result, out);
+  //     t.equal_v4(quatA, [1, 2, 3, 4]);
+  //     t.equal_v4(quatB, [5, 6, 7, 8]);
 
-      t.end();
-    });
+  //     t.end();
+  //   });
 
-    t.test('when quatA is the output quaternion', t => {
-      result = quat.add(quatA, quatA, quatB);
+  //   t.test('when quatA is the output quaternion', t => {
+  //     result = quat.add(quatA, quatA, quatB);
 
-      t.equal_v4(quatA, [6, 8, 10, 12]);
-      t.equal(result, quatA);
-      t.equal_v4(quatB, [5, 6, 7, 8]);
+  //     t.equal_v4(quatA, [6, 8, 10, 12]);
+  //     t.equal(result, quatA);
+  //     t.equal_v4(quatB, [5, 6, 7, 8]);
 
-      t.end();
-    });
+  //     t.end();
+  //   });
 
-    t.test('when quatB is the output quaternion', t => {
-      result = quat.add(quatB, quatA, quatB);
+  //   t.test('when quatB is the output quaternion', t => {
+  //     result = quat.add(quatB, quatA, quatB);
 
-      t.equal_v4(quatB, [6, 8, 10, 12]);
-      t.equal(result, quatB);
-      t.equal_v4(quatA, [1, 2, 3, 4]);
+  //     t.equal_v4(quatB, [6, 8, 10, 12]);
+  //     t.equal(result, quatB);
+  //     t.equal_v4(quatA, [1, 2, 3, 4]);
 
-      t.end();
-    });
+  //     t.end();
+  //   });
 
-    t.end();
-  });
+  //   t.end();
+  // });
 
   t.test('multiply', t => {
     t.equal(quat.mul, quat.multiply);
