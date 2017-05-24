@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.2.1
+ * vmath v1.3.0
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -3462,17 +3462,6 @@ quat.getAxisAngle = function (out_axis, q) {
 };
 
 /**
- * Adds two quat's
- *
- * @param {quat} out the receiving quaternion
- * @param {quat} a the first operand
- * @param {quat} b the second operand
- * @returns {quat} out
- * @function
- */
-quat.add = vec4.add;
-
-/**
  * Multiplies two quat's
  *
  * @param {quat} out the receiving quaternion
@@ -6514,6 +6503,514 @@ mat4.equals = function (a, b) {
   );
 };
 
+class _color3 {
+  constructor(r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+  }
+}
+
+/**
+ * @class Color
+ * @name color3
+ */
+let color3 = {};
+
+/**
+ * Creates a new color
+ *
+ * @returns {color3} a new color
+ */
+color3.create = function () {
+  return new _color3(1, 1, 1);
+};
+
+/**
+ * Creates a new color initialized with the given values
+ *
+ * @param {Number} r red component
+ * @param {Number} g green component
+ * @param {Number} b blue component
+ * @returns {color3} a new color
+ * @function
+ */
+color3.new = function (r, g, b) {
+  return new _color3(r, g, b);
+};
+
+/**
+ * Creates a new color initialized with values from an existing quaternion
+ *
+ * @param {color3} a color to clone
+ * @returns {color3} a new color
+ * @function
+ */
+color3.clone = function (a) {
+  return new _color3(a.r, a.g, a.b, a.a);
+};
+
+/**
+ * Copy the values from one color to another
+ *
+ * @param {color3} out the receiving color
+ * @param {color3} a the source color
+ * @returns {color3} out
+ * @function
+ */
+color3.copy = function (out, a) {
+  out.r = a.r;
+  out.g = a.g;
+  out.b = a.b;
+  return out;
+};
+
+/**
+ * Set the components of a color to the given values
+ *
+ * @param {color3} out the receiving color
+ * @param {Number} r red component
+ * @param {Number} g green component
+ * @param {Number} b blue component
+ * @returns {color3} out
+ * @function
+ */
+color3.set = function (out, r, g, b) {
+  out.r = r;
+  out.g = g;
+  out.b = b;
+  return out;
+};
+
+/**
+ * Adds two color's
+ *
+ * @param {color3} out the receiving color
+ * @param {color3} a the first operand
+ * @param {color3} b the second operand
+ * @returns {color3} out
+ * @function
+ */
+color3.add = function (out, a, b) {
+  out.r = a.r + b.r;
+  out.g = a.g + b.g;
+  out.b = a.b + b.b;
+  return out;
+};
+
+/**
+ * Subtracts color b from color a
+ *
+ * @param {color3} out the receiving color
+ * @param {color3} a the first operand
+ * @param {color3} b the second operand
+ * @returns {color3} out
+ */
+color3.subtract = function (out, a, b) {
+  out.r = a.r - b.r;
+  out.g = a.g - b.g;
+  out.b = a.b - b.b;
+  return out;
+};
+
+/**
+ * Alias for {@link color3.subtract}
+ * @function
+ */
+color3.sub = color3.subtract;
+
+/**
+ * Multiplies two color's
+ *
+ * @param {color3} out the receiving color
+ * @param {color3} a the first operand
+ * @param {color3} b the second operand
+ * @returns {color3} out
+ * @function
+ */
+color3.multiply = function (out, a, b) {
+  out.r = a.r * b.r;
+  out.g = a.g * b.g;
+  out.b = a.b * b.b;
+  return out;
+};
+
+/**
+ * Alias for {@link color3.multiply}
+ * @function
+ */
+color3.mul = color3.multiply;
+
+/**
+ * Divides two color's
+ *
+ * @param {color3} out the receiving vector
+ * @param {color3} a the first operand
+ * @param {color3} b the second operand
+ * @returns {color3} out
+ */
+color3.divide = function (out, a, b) {
+  out.r = a.r / b.r;
+  out.g = a.g / b.g;
+  out.b = a.b / b.b;
+  return out;
+};
+
+/**
+ * Alias for {@link color3.divide}
+ * @function
+ */
+color3.div = color3.divide;
+
+
+/**
+ * Scales a color by a scalar number
+ *
+ * @param {color3} out the receiving vector
+ * @param {color3} a the vector to scale
+ * @param {Number} b amount to scale the vector by
+ * @returns {color3} out
+ * @function
+ */
+color3.scale = function (out, a, b) {
+  out.r = a.r * b;
+  out.g = a.g * b;
+  out.b = a.b * b;
+  return out;
+};
+
+/**
+ * Performs a linear interpolation between two color's
+ *
+ * @param {color3} out the receiving color
+ * @param {color3} a the first operand
+ * @param {color3} b the second operand
+ * @param {Number} t interpolation amount between the two inputs
+ * @returns {color3} out
+ * @function
+ */
+color3.lerp = function (out, a, b, t) {
+  let ar = a.r,
+      ag = a.g,
+      ab = a.b;
+  out.r = ar + t * (b.r - ar);
+  out.g = ag + t * (b.g - ag);
+  out.b = ab + t * (b.b - ab);
+  return out;
+};
+
+/**
+ * Returns a string representation of a color
+ *
+ * @param {color3} a vector to represent as a string
+ * @returns {String} string representation of the vector
+ */
+color3.str = function (a) {
+  return `color3(${a.r}, ${a.g}, ${a.b})`;
+};
+
+/**
+ * Returns typed array
+ *
+ * @param {array} out
+ * @param {color3} a
+ * @returns {array}
+ */
+color3.array = function (out, a) {
+  out[0] = a.r;
+  out[1] = a.g;
+  out[2] = a.b;
+
+  return out;
+};
+
+/**
+ * Returns whether or not the color have exactly the same elements in the same position (when compared with ===)
+ *
+ * @param {color3} a The first color3.
+ * @param {color3} b The second color3.
+ * @returns {Boolean} True if the colors are equal, false otherwise.
+ */
+color3.exactEquals = function (a, b) {
+  return a.r === b.r && a.g === b.g && a.b === b.b;
+};
+
+/**
+ * Returns whether or not the colors have approximately the same elements in the same position.
+ *
+ * @param {color3} a The first color3.
+ * @param {color3} b The second color3.
+ * @returns {Boolean} True if the colors are equal, false otherwise.
+ */
+color3.equals = function (a, b) {
+  let a0 = a.r, a1 = a.g, a2 = a.b;
+  let b0 = b.r, b1 = b.g, b2 = b.b;
+  return (Math.abs(a0 - b0) <= EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+    Math.abs(a1 - b1) <= EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+    Math.abs(a2 - b2) <= EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)));
+};
+
+class _color4 {
+  constructor(r, g, b, a) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.a = a;
+  }
+}
+
+/**
+ * @class Color
+ * @name color4
+ */
+let color4 = {};
+
+/**
+ * Creates a new color
+ *
+ * @returns {color4} a new color
+ */
+color4.create = function () {
+  return new _color4(1, 1, 1, 1);
+};
+
+/**
+ * Creates a new color initialized with the given values
+ *
+ * @param {Number} r red component
+ * @param {Number} g green component
+ * @param {Number} b blue component
+ * @param {Number} a alpha component
+ * @returns {color4} a new color
+ * @function
+ */
+color4.new = function (r, g, b, a) {
+  return new _color4(r, g, b, a);
+};
+
+/**
+ * Creates a new color initialized with values from an existing quaternion
+ *
+ * @param {color4} a color to clone
+ * @returns {color4} a new color
+ * @function
+ */
+color4.clone = function (a) {
+  return new _color4(a.r, a.g, a.b, a.a);
+};
+
+/**
+ * Copy the values from one color to another
+ *
+ * @param {color4} out the receiving color
+ * @param {color4} a the source color
+ * @returns {color4} out
+ * @function
+ */
+color4.copy = function (out, a) {
+  out.r = a.r;
+  out.g = a.g;
+  out.b = a.b;
+  out.a = a.a;
+  return out;
+};
+
+/**
+ * Set the components of a color to the given values
+ *
+ * @param {color4} out the receiving color
+ * @param {Number} r red component
+ * @param {Number} g green component
+ * @param {Number} b blue component
+ * @param {Number} a alpha component
+ * @returns {color4} out
+ * @function
+ */
+color4.set = function (out, r, g, b, a) {
+  out.r = r;
+  out.g = g;
+  out.b = b;
+  out.a = a;
+  return out;
+};
+
+/**
+ * Adds two color's
+ *
+ * @param {color4} out the receiving color
+ * @param {color4} a the first operand
+ * @param {color4} b the second operand
+ * @returns {color4} out
+ * @function
+ */
+color4.add = function (out, a, b) {
+  out.r = a.r + b.r;
+  out.g = a.g + b.g;
+  out.b = a.b + b.b;
+  out.a = a.a + b.a;
+  return out;
+};
+
+/**
+ * Subtracts color b from color a
+ *
+ * @param {color4} out the receiving color
+ * @param {color4} a the first operand
+ * @param {color4} b the second operand
+ * @returns {color4} out
+ */
+color4.subtract = function (out, a, b) {
+  out.r = a.r - b.r;
+  out.g = a.g - b.g;
+  out.b = a.b - b.b;
+  out.a = a.a - b.a;
+  return out;
+};
+
+/**
+ * Alias for {@link color4.subtract}
+ * @function
+ */
+color4.sub = color4.subtract;
+
+/**
+ * Multiplies two color's
+ *
+ * @param {color4} out the receiving color
+ * @param {color4} a the first operand
+ * @param {color4} b the second operand
+ * @returns {color4} out
+ * @function
+ */
+color4.multiply = function (out, a, b) {
+  out.r = a.r * b.r;
+  out.g = a.g * b.g;
+  out.b = a.b * b.b;
+  out.a = a.a * b.a;
+  return out;
+};
+
+/**
+ * Alias for {@link color4.multiply}
+ * @function
+ */
+color4.mul = color4.multiply;
+
+/**
+ * Divides two color's
+ *
+ * @param {color4} out the receiving vector
+ * @param {color4} a the first operand
+ * @param {color4} b the second operand
+ * @returns {color4} out
+ */
+color4.divide = function (out, a, b) {
+  out.r = a.r / b.r;
+  out.g = a.g / b.g;
+  out.b = a.b / b.b;
+  out.a = a.a / b.a;
+  return out;
+};
+
+/**
+ * Alias for {@link color4.divide}
+ * @function
+ */
+color4.div = color4.divide;
+
+
+/**
+ * Scales a color by a scalar number
+ *
+ * @param {color4} out the receiving vector
+ * @param {color4} a the vector to scale
+ * @param {Number} b amount to scale the vector by
+ * @returns {color4} out
+ * @function
+ */
+color4.scale = function (out, a, b) {
+  out.r = a.r * b;
+  out.g = a.g * b;
+  out.b = a.b * b;
+  out.a = a.a * b;
+  return out;
+};
+
+/**
+ * Performs a linear interpolation between two color's
+ *
+ * @param {color4} out the receiving color
+ * @param {color4} a the first operand
+ * @param {color4} b the second operand
+ * @param {Number} t interpolation amount between the two inputs
+ * @returns {color4} out
+ * @function
+ */
+color4.lerp = function (out, a, b, t) {
+  let ar = a.r,
+      ag = a.g,
+      ab = a.b,
+      aa = a.a;
+  out.r = ar + t * (b.r - ar);
+  out.g = ag + t * (b.g - ag);
+  out.b = ab + t * (b.b - ab);
+  out.a = aa + t * (b.a - aa);
+  return out;
+};
+
+/**
+ * Returns a string representation of a color
+ *
+ * @param {color4} a vector to represent as a string
+ * @returns {String} string representation of the vector
+ */
+color4.str = function (a) {
+  return `color4(${a.r}, ${a.g}, ${a.b}, ${a.a})`;
+};
+
+/**
+ * Returns typed array
+ *
+ * @param {array} out
+ * @param {color4} a
+ * @returns {array}
+ */
+color4.array = function (out, a) {
+  out[0] = a.r;
+  out[1] = a.g;
+  out[2] = a.b;
+  out[3] = a.a;
+
+  return out;
+};
+
+/**
+ * Returns whether or not the color have exactly the same elements in the same position (when compared with ===)
+ *
+ * @param {color4} a The first color4.
+ * @param {color4} b The second color4.
+ * @returns {Boolean} True if the colors are equal, false otherwise.
+ */
+color4.exactEquals = function (a, b) {
+  return a.r === b.r && a.g === b.g && a.b === b.b && a.a === b.a;
+};
+
+/**
+ * Returns whether or not the colors have approximately the same elements in the same position.
+ *
+ * @param {color4} a The first color4.
+ * @param {color4} b The second color4.
+ * @returns {Boolean} True if the colors are equal, false otherwise.
+ */
+color4.equals = function (a, b) {
+  let a0 = a.r, a1 = a.g, a2 = a.b, a3 = a.a;
+  let b0 = b.r, b1 = b.g, b2 = b.b, b3 = b.a;
+  return (Math.abs(a0 - b0) <= EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+    Math.abs(a1 - b1) <= EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+    Math.abs(a2 - b2) <= EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
+    Math.abs(a3 - b3) <= EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)));
+};
+
 // NOTE: there is no syntax for: export {* as bits} from './lib/bits';
 let bits = bits_;
 
@@ -6526,6 +7023,8 @@ exports.mat2 = mat2;
 exports.mat23 = mat23;
 exports.mat3 = mat3;
 exports.mat4 = mat4;
+exports.color3 = color3;
+exports.color4 = color4;
 exports.EPSILON = EPSILON;
 exports.equals = equals;
 exports.approx = approx;
