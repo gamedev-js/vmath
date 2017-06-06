@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.3.0
+ * vmath v1.3.1
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -6586,9 +6586,9 @@ color3.set = function (out, r, g, b) {
 /**
  * Set from hex
  *
- * @param {color4} out the receiving color
+ * @param {color3} out the receiving color
  * @param {Number} hex
- * @returns {color4} out
+ * @returns {color3} out
  * @function
  */
 color3.fromHex = function (out, hex) {
