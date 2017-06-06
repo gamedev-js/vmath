@@ -54,6 +54,15 @@ tap.test('color4', t => {
     t.end();
   });
 
+  t.test('fromHex', t => {
+    result = color4.fromHex(out, 0x7fff7fff);
+
+    t.equal_c4(out, [127/255, 1, 127/255, 1]);
+    t.equal(result, out);
+
+    t.end();
+  });
+
   t.test('add', t => {
     t.test('with a separate output color', t => {
       result = color4.add(out, colorA, colorB);
@@ -304,6 +313,14 @@ tap.test('color4', t => {
     t.equal(r2, true);
     t.equal_c4(colorA, [0, 1, 2, 3]);
     t.equal_c4(colorB, [0, 1, 2, 3]);
+
+    t.end();
+  });
+
+  t.test('hex', t => {
+    color4.set(colorA, 0.5, 1, 0.5, 1);
+
+    t.equal(color4.hex(colorA), 0x7fff7fff);
 
     t.end();
   });

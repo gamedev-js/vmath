@@ -54,6 +54,15 @@ tap.test('color3', t => {
     t.end();
   });
 
+  t.test('fromHex', t => {
+    result = color3.fromHex(out, 0x7fff7f);
+
+    t.equal_c3(out, [127/255, 1, 127/255]);
+    t.equal(result, out);
+
+    t.end();
+  });
+
   t.test('add', t => {
     t.test('with a separate output color', t => {
       result = color3.add(out, colorA, colorB);
@@ -305,6 +314,14 @@ tap.test('color3', t => {
     t.equal(r2, true);
     t.equal_c3(colorA, [0, 1, 2]);
     t.equal_c3(colorB, [0, 1, 2]);
+
+    t.end();
+  });
+
+  t.test('hex', t => {
+    color3.set(colorA, 0.5, 1, 0.5);
+
+    t.equal(color3.hex(colorA), 0x7fff7f);
 
     t.end();
   });
