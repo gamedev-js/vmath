@@ -6583,6 +6583,25 @@ color3.set = function (out, r, g, b) {
 };
 
 /**
+ * Set from hex
+ *
+ * @param {color4} out the receiving color
+ * @param {Number} hex
+ * @returns {color4} out
+ * @function
+ */
+color3.fromHex = function (out, hex) {
+  let r = ((hex >> 16)) / 255.0;
+  let g = ((hex >> 8) & 0xff) / 255.0;
+  let b = ((hex) & 0xff) / 255.0;
+
+  out.r = r;
+  out.g = g;
+  out.b = b;
+  return out;
+};
+
+/**
  * Adds two color's
  *
  * @param {color3} out the receiving color
@@ -6750,6 +6769,16 @@ color3.equals = function (a, b) {
     Math.abs(a2 - b2) <= EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)));
 };
 
+/**
+ * Returns the hex value
+ *
+ * @param {color3} a The color
+ * @returns {Number}
+ */
+color3.hex = function (a) {
+  return (a.r * 255) << 16 | (a.g * 255) << 8 | (a.b * 255);
+};
+
 class _color4 {
   constructor(r, g, b, a) {
     this.r = r;
@@ -6827,6 +6856,27 @@ color4.copy = function (out, a) {
  * @function
  */
 color4.set = function (out, r, g, b, a) {
+  out.r = r;
+  out.g = g;
+  out.b = b;
+  out.a = a;
+  return out;
+};
+
+/**
+ * Set from hex
+ *
+ * @param {color4} out the receiving color
+ * @param {Number} hex
+ * @returns {color4} out
+ * @function
+ */
+color4.fromHex = function (out, hex) {
+  let r = ((hex >> 24)) / 255.0;
+  let g = ((hex >> 16) & 0xff) / 255.0;
+  let b = ((hex >> 8) & 0xff) / 255.0;
+  let a = ((hex) & 0xff) / 255.0;
+
   out.r = r;
   out.g = g;
   out.b = b;
@@ -7009,6 +7059,16 @@ color4.equals = function (a, b) {
     Math.abs(a1 - b1) <= EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
     Math.abs(a2 - b2) <= EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
     Math.abs(a3 - b3) <= EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)));
+};
+
+/**
+ * Returns the hex value
+ *
+ * @param {color4} a The color
+ * @returns {Number}
+ */
+color4.hex = function (a) {
+  return (a.r * 255) << 24 | (a.g * 255) << 16 | (a.b * 255) << 8 | a.a * 255;
 };
 
 // NOTE: there is no syntax for: export {* as bits} from './lib/bits';
