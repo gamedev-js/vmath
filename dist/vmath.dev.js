@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.3.1
+ * vmath v1.3.2
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -7068,7 +7068,7 @@ color4.equals = function (a, b) {
  * @returns {Number}
  */
 color4.hex = function (a) {
-  return (a.r * 255) << 24 | (a.g * 255) << 16 | (a.b * 255) << 8 | a.a * 255;
+  return ((a.r * 255) << 24 | (a.g * 255) << 16 | (a.b * 255) << 8 | a.a * 255) >>> 0;
 };
 
 // NOTE: there is no syntax for: export {* as bits} from './lib/bits';
