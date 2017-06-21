@@ -322,6 +322,10 @@ tap.test('color4', t => {
 
     t.equal(color4.hex(colorA), 0x7fff7fff);
 
+    color4.set(colorA, 1, 1, 1, 0);
+
+    t.equal(color4.hex(colorA), 0xffffff00);
+
     t.end();
   });
 
