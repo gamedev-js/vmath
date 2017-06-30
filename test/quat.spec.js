@@ -9,6 +9,8 @@ tap.test('quat', t => {
   let id = quat.create();
   let vec = vec3.create();
   let deg90 = Math.PI / 2;
+  let deg45 = Math.PI / 4;
+  let deg30 = Math.PI / 6;
 
   t.beforeEach(done => {
     quatA = quat.new(1, 2, 3, 4);
@@ -87,6 +89,40 @@ tap.test('quat', t => {
     t.equal(result, out);
     vec3.transformQuat(vec, vec3.new(0, 1, 0), out);
     t.equal_v3(vec, [-1, 0, 0]);
+
+    t.end();
+  });
+
+  t.test('rotateAround', t => {
+    let rotx = quat.create();
+    let roty = quat.create();
+
+    quat.rotateX(rotx, id, deg30);
+    quat.rotateY(roty, id, deg45);
+    quat.mul(quatA, roty, rotx);
+    quat.rotateAround(quatA, quatA, vec3.new(0,1,0), -deg90);
+
+    quat.rotateX(rotx, id, deg30);
+    quat.rotateY(roty, id, -deg45);
+    quat.mul(quatB, roty, rotx);
+
+    let r0 = quat.equals(quatA, quatB);
+    t.equal(r0, true);
+
+    t.end();
+  });
+
+  t.test('rotateAroundLocal', t => {
+    let rotx = quat.create();
+
+    quat.rotateX(rotx, id, deg30);
+    quat.rotateY(quatA, rotx, deg45);
+
+    quat.rotateX(rotx, id, deg30);
+    quat.rotateAroundLocal(quatB, rotx, vec3.new(0,1,0), deg45);
+
+    let r0 = quat.equals(quatA, quatB);
+    t.equal(r0, true);
 
     t.end();
   });
