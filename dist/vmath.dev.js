@@ -1,6 +1,6 @@
 
 /*
- * vmath v1.3.2
+ * vmath v1.4.0
  * (c) 2017 @Johnny Wu
  * Released under the MIT License.
  */
@@ -3559,6 +3559,51 @@ quat.rotateZ = function (out, a, rad) {
   out.w = aw * bw - az * bz;
   return out;
 };
+
+/**
+ * Rotates a quaternion by the given angle about the axis in world space
+ *
+ * @param {quat} out quat receiving operation result
+ * @param {quat} rot quat to rotate
+ * @param {vec3} axis the axis around which to rotate in world space
+ * @param {number} rad angle (in radians) to rotate
+ * @returns {quat} out
+ */
+quat.rotateAround = (function () {
+  let v3_tmp = vec3.create();
+  let q_tmp = quat.create();
+
+  return function (out, rot, axis, rad) {
+    // get inv-axis (local to rot)
+    quat.invert(q_tmp, rot);
+    vec3.transformQuat(v3_tmp, axis, q_tmp);
+    // rotate by inv-axis
+    quat.fromAxisAngle(q_tmp, v3_tmp, rad);
+    quat.mul(out, rot, q_tmp);
+
+    return out;
+  };
+})();
+
+/**
+ * Rotates a quaternion by the given angle about the axis in local space
+ *
+ * @param {quat} out quat receiving operation result
+ * @param {quat} rot quat to rotate
+ * @param {vec3} axis the axis around which to rotate in local space
+ * @param {number} rad angle (in radians) to rotate
+ * @returns {quat} out
+ */
+quat.rotateAroundLocal = (function () {
+  let q_tmp = quat.create();
+
+  return function (out, rot, axis, rad) {
+    quat.fromAxisAngle(q_tmp, axis, rad);
+    quat.mul(out, rot, q_tmp);
+
+    return out;
+  };
+})();
 
 /**
  * Calculates the W component of a quat from the X, Y, and Z components.
