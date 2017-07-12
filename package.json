@@ -1,15 +1,18 @@
 {
   "name": "vmath",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Yet another gl-matrix: faster and smaller",
   "main": "dist/vmath.js",
+  "module" : "index.js",
   "jsnext:main": "index.js",
   "scripts": {
+    "prepare": "npm run build",
+    "pretest": "npm run build:dev",
+    "build": "npm run build:dev && npm run build:min",
     "build:dev": "rollup -c ./script/rollup.config.js",
     "build:min": "uglifyjs ./dist/vmath.dev.js --mangle --source-map url=vmath.min.js.map -o ./dist/vmath.min.js",
     "docs": "documentation build ./index.js -f md -o api.md",
-    "release": "npm run build:dev && npm run build:min",
-    "test": "npm run build:dev && tap test/*.spec.js"
+    "test": "tap test/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -34,5 +37,10 @@
     "rollup": "^0.41.4",
     "tap": "^10.3.0",
     "uglify-es": "^3.0.15"
-  }
+  },
+  "files": [
+    "dist",
+    "lib",
+    "index.js"
+  ]
 }

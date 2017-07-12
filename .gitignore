@@ -26,5 +26,6 @@ profile
 *.log
 
 # project files
-node_modules/
-bower_components/
+node_modules
+bower_components
+dist
