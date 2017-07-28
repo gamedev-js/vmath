@@ -799,5 +799,14 @@ tap.test('quat', t => {
     t.end();
   });
 
+  t.test('JSON.stringify', t => {
+    t.equal(
+      JSON.stringify({ quatA, quatB }),
+      '{"quatA":[1,2,3,4],"quatB":[5,6,7,8]}'
+    );
+
+    t.end();
+  });
+
   t.end();
 });

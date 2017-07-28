@@ -329,5 +329,14 @@ tap.test('color4', t => {
     t.end();
   });
 
+  t.test('JSON.stringify', t => {
+    t.equal(
+      JSON.stringify({ colorA, colorB }),
+      '{"colorA":[1,2,3,4],"colorB":[5,6,7,8]}'
+    );
+
+    t.end();
+  });
+
   t.end();
 });

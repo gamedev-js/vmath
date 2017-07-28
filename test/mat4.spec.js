@@ -788,5 +788,14 @@ tap.test('mat4', t => {
     t.end();
   });
 
+  t.test('JSON.stringify', t => {
+    t.equal(
+      JSON.stringify({ matA, matB }),
+      '{"matA":[1,0,0,0,0,1,0,0,0,0,1,0,1,2,3,1],"matB":[1,0,0,0,0,1,0,0,0,0,1,0,4,5,6,1]}'
+    );
+
+    t.end();
+  });
+
   t.end();
 });

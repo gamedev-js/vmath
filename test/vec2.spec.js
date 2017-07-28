@@ -801,5 +801,14 @@ tap.test('vec2', t => {
     t.end();
   });
 
+  t.test('JSON.stringify', t => {
+    t.equal(
+      JSON.stringify({ vecA, vecB }),
+      '{"vecA":[1,2],"vecB":[3,4]}'
+    );
+
+    t.end();
+  });
+
   t.end();
 });
