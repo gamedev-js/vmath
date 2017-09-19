@@ -233,6 +233,23 @@ tap.test('mat23', t => {
     t.end();
   });
 
+  t.test('fromRTS', t => {
+    let vecA = vec2.create();
+    t.beforeEach(done => {
+      vec2.set(vecA, 2, 3);
+      done();
+    });
+
+    t.test('with a separate output matrix', t => {
+      result = mat23.fromRTS(out, Math.PI * 0.5, vecA, vecA);
+      t.equal_m23(out, [0, 2, -3, 0, 2, 3]);
+      t.equal(result, out);
+      t.end();
+    });
+
+    t.end();
+  });
+
   t.test('str', t => {
     result = mat23.str(matA);
 
