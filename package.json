@@ -1,6 +1,6 @@
 {
   "name": "vmath",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "Yet another gl-matrix: faster and smaller",
   "main": "dist/vmath.js",
   "module": "index.js",
